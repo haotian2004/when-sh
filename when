@@ -1,0 +1,79 @@
+#!/bin/bash
+# Copyright (c) 2019-2020 haotian2004
+# https://github.com/haotian2004/when-sh
+clear
+colorhint="\033[36;43;1m"
+colorend="\033[0m"
+prompt="\n————————————————————————————————————\n"
+function hint (){ echo -e "$prompt" ; }
+function logo (){
+	echo -e "\n\n\n\n\n\n"
+	echo -e "               ■"
+	echo -e "               ■"
+	echo -e "               ■"
+	echo -e "               ■"
+	echo -e "  ■   ■   ■    ■■■■■■■    ■■■■■■■    ■■■■■■■"
+	echo -e "  ■   ■   ■    ■     ■    ■     ■    ■     ■"
+	echo -e "  ■   ■   ■    ■     ■    ■■■■■■■    ■     ■"
+	echo -e "  ■   ■   ■    ■     ■    ■          ■     ■"
+	echo -e "  ■■■■■■■■■    ■     ■    ■■■■■■■    ■     ■"
+}
+function home0 (){
+	echo -e "\n\n此乃haotian2004 Reforge的树莓派专用when，功能会慢慢添加\n\n\n"
+	echo -e " 1   更换清华源\n"
+	sleep 0.016
+	echo -e " 99   充软妹币\n"
+	sleep 0.016
+	echo -e " 0   退出\n\n\n"
+}
+function home1 (){
+	cd ~
+	read -p " ~> " home
+	case $home in
+		1 )
+			sleep 1
+			hint ; echo -e "官网: https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/" ; hint
+			sleep 3
+			sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+			echo -e "sources.list已备份(/etc/apt/sources.list)"
+			sudo cp /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak
+			echo -e "raspi.list已备份(/etc/apt/sources.list.d/raspi.list)"
+			
+			sudo apt update
+			home0 ; home1 ;;
+			
+		99 )
+			sleep 1
+			read -p "请输入金额: " a
+			case $a in
+				[0-9]* )
+					read -p "请输入支付密码: "
+					echo -e "连接服务器..."
+					sleep 1
+					echo -e "成功充入 $a 软妹币"
+					sleep 1
+					echo -e "您已升为 svip" ;;
+				* )
+					sleep 1
+					echo -e "服务器请求错误\n自毁程序启动..."
+					sleep 3
+					echo -e "boom!" ;;
+			esac
+			exit ;;
+		0 )
+			clear
+			cat $PREFIX/etc/motd
+			exit ;;
+		00 )
+			exit ;;
+		* )
+			echo -e "该项超脱了天地之外!"
+			sleep 1
+			home1 ;;
+	esac
+}
+
+logo
+sleep 1
+home0 ; home1
+exit
