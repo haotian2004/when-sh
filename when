@@ -34,14 +34,11 @@ function home1 (){
 			sleep 1
 			hint ; echo -e "官网: https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/" ; hint
 			sleep 3
-			sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+			cp /etc/apt/sources.list /etc/apt/sources.list.bak
 			echo -e "sources.list已备份(/etc/apt/sources.list)"
-			sudo cp /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak
+			cp /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak
 			echo -e "raspi.list已备份(/etc/apt/sources.list.d/raspi.list)"
-			
-			sudo apt update
-			home0 ; home1 ;;
-			
+			set-mirro0；set-mirro1 ;;
 		99 )
 			sleep 1
 			read -p "请输入金额: " a
@@ -71,6 +68,27 @@ function home1 (){
 			sleep 1
 			home1 ;;
 	esac
+
+function set-mirro0 (){
+		echo -e "\n\n\n\n\n"
+		echo -e "Debian版本号"
+		echo -e " 1   10"
+		echo -e " 2   9"
+		echo -e " 3   8"
+		echo -e " 4   7"
+
+}
+
+function set-mirro1 () {
+		cd ~
+		read -p "~>" set-mirro 
+		case $set-mirro in 
+				1)
+
+
+esac
+}
+
 }
 
 logo
